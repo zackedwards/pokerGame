@@ -21,7 +21,7 @@ int main(int argc, const char * argv[]) {
     cout << "            Poker" << endl;
     cout << "*****************************" << endl;
     int choice1 = 0;
-    //thsi while loop keeps the game going until you quit
+    //this while loop keeps the game going until you quit
     while (choice1 != 3) {
         cout << " " << endl;
     cout << "Deal me in (1)" << endl;

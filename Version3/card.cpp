@@ -5,6 +5,7 @@
 #include <ctime>
 #include "card.h"
 
+using namespace texasHoldEm;
 using namespace std;
 
 card::card()

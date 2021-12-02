@@ -7,6 +7,7 @@
 #include "hand.h"
 #include "player.h"
 
+using namespace texasHoldEm;
 using namespace std;
 
 player::player(string name, int money)

@@ -5,6 +5,7 @@
 #include <ctime>
 #include "hand.h"
 
+using namespace texasHoldEm;
 using namespace std;
 
 hand::hand()
