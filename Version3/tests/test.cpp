@@ -2,9 +2,9 @@
 #include <ctime>
 #include <cassert>
 
-#include "player.h"
-#include "card.h"
-#include "hand.h"
+#include "../include/card/card.h"
+#include "../include/hand/hand.h"
+#include "../include/player/player.h"
 
 using namespace std;
 

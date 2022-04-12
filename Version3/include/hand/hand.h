@@ -5,7 +5,7 @@
 #include <ctime>
 #include <map>
 
-#include "card.h"
+#include "../card/card.h"
 
 using namespace std;
 

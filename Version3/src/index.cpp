@@ -4,9 +4,9 @@
 #include <iostream>
 #include <ctime>
 
-#include "player.h"
-#include "card.h"
-#include "hand.h"
+#include "../include/player/player.h"
+#include "../include/card/card.h"
+#include "../include/hand/hand.h"
 
 using namespace std;
 

@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <ctime>
-#include "card.h"
-#include "hand.h"
+#include "../card/card.h"
+#include "../hand/hand.h"
 #include "player.h"
 
 using namespace std;
