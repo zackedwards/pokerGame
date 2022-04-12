@@ -13,6 +13,12 @@ card::card()
     this->rank = rand() % 13 + 1;
 }
 
+card::card(int rank, int suit)
+{
+    this->suit = suit;
+    this->rank = rank;
+}
+
 int card::getSuit()
 {
     return suit;
@@ -21,6 +27,16 @@ int card::getSuit()
 int card::getRank()
 {
     return rank;
+}
+
+void card::setSuit(int suit)
+{
+    this->suit = suit;
+}
+
+void card::setRank(int rank)
+{
+    this->rank = rank;
 }
 
 string card::getSuitAsString()

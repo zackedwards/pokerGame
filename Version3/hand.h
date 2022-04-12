@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <ctime>
+#include <map>
 
 #include "card.h"
 
@@ -19,15 +20,17 @@ private:
     int numCards;
 
 public:
+    struct occurances_result;
     hand();
     void addCard(card);
+    void addCard(int, int);
     string getPokerHandAsString();
     int getPokerHandValue();
     int getNumCards();
     void printHand();
     void removeCard(int);
     void sortHand();
-    int countOccurences(int x, bool pair, bool two_pair, bool three, bool four);
+    occurances_result countOccurences();
 };
 
 #endif // HAND_H

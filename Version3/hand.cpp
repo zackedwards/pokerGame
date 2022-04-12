@@ -3,9 +3,16 @@
 
 #include <iostream>
 #include <ctime>
+#include <map>
 #include "hand.h"
 
 using namespace std;
+
+struct hand::occurances_result
+{
+    int value;
+    int count;
+};
 
 hand::hand()
 {
@@ -80,14 +87,21 @@ int hand::getPokerHandValue()
             }
         }
 
-        sortHand();
+        sortHand(); // ascending
         // check for straight
         for (int i = 0; i < numCards - 1; i++)
         {
-            if (cards[i].getRank() != cards[i + 1].getRank() - 1)
+            if (cards[i].getRank() != cards[i + 1].getRank() - 1) // check if the one to the right is one rank higher
             {
-                straight = false;
-                break;
+                if (cards[i].getRank() == 1 && cards[i + 1].getRank() == 10) // ace is high
+                {
+                    straight = true;
+                }
+                else
+                {
+                    straight = false;
+                    break;
+                }
             }
             else
             {
@@ -96,10 +110,7 @@ int hand::getPokerHandValue()
         }
 
         // check for pairs, three of a kind, four of a kind
-        for (int i = 0; i < numCards - 1; i++)
-        {
-            countOccurences(cards[i].getRank(), pair, two_pair, three, four);
-        }
+        occurances_result occurances = countOccurences();
 
         // returns the value of the hand
         if (cards[0].getRank() == 1 && cards[4].getRank() == 13 && flush == true && straight == true)
@@ -110,11 +121,11 @@ int hand::getPokerHandValue()
         {
             return 2;
         }
-        else if (four)
+        else if (occurances.count == 4) // four of a kind
         {
             return 3;
         }
-        else if (three && pair)
+        else if (occurances.count == 5) // full house
         {
             return 4;
         }
@@ -126,15 +137,15 @@ int hand::getPokerHandValue()
         {
             return 6;
         }
-        else if (three)
+        else if (occurances.count == 3) // three of a kind
         {
             return 7;
         }
-        else if (two_pair)
+        else if (occurances.count == 2) // two pair
         {
             return 8;
         }
-        else if (pair)
+        else if (occurances.count == 1) // pair
         {
             return 9;
         }
@@ -149,7 +160,7 @@ int hand::getPokerHandValue()
     }
 }
 
-void hand::sortHand()
+void hand::sortHand() // ascending order
 {
     // sort the hand
     for (int i = 0; i < numCards; i++)
@@ -166,35 +177,72 @@ void hand::sortHand()
     }
 }
 
-int hand::countOccurences(int x, bool pair, bool two_pair, bool three, bool four)
+hand::occurances_result hand::countOccurences()
 {
     // counts the number of occurences of a card in the hand
-    // returns the number of occurences
-    int count = 0;
-    for (int i = 0; i < numCards; i++)
+    // returns a struct which represents either a pair, two pair, three of a kind, four of a kind, etc in the count
+    // struct also contains the rank of the card for comparing a pair, two pair, etc in the value
+    // returns 0 if no occurences
+    // returns 1 if one pair
+    // returns 2 if two pair
+    // returns 3 if three of a kind
+    // returns 4 if four of a kind
+    // returns 5 if a full house
+    occurances_result res;
+    res.value = 0;
+    res.count = 0;
+    map<int, int> occurances;
+    for (int i = 0; i < numCards; i++) // this quickly counts occurances
     {
-        if (cards[i].getRank() == x)
+        occurances[cards[i].getRank()]++;
+    }
+    for (map<int, int>::const_iterator it = occurances.begin(); it != occurances.end(); ++it)
+    {
+        // std::cout << it->first << " " << it->second << "\n"; //a test debug statement
+        if (it->second == 4) // check for four of a kind
         {
-            count++;
+            res.value = it->first;
+            res.count = 4;
+            return res;
+        }
+        else if (it->second == 3)
+        {
+            res.value = it->first;
+            if (res.count == 1) // check for one pair
+            {
+                res.count = 5; // its a full house
+                return res;
+            }
+            else
+            {
+                res.count = 3; // if no pair, its three of a kind
+            }
+        }
+        else if (it->second == 2)
+        {
+            if (res.count == 1) // check for one pair already existing
+            {
+                if (it->first > res.value) // if this pairs value is higher than the other
+                {
+                    res.value = it->first;
+                }
+                res.count = 2;
+                return res; // return two pair
+            }
+            else if (res.count == 3) // check for three of a kind already existing
+            {
+                res.count = 5; // its a full house
+                return res;
+            }
+            else
+            {
+                res.value = it->first;
+                res.count = 1; // if no pair or three of a kind, its a pair
+            }
         }
     }
-    if (count == 2)
-    {
-        if (pair == true)
-        {
-            two_pair = true;
-        }
-        pair = true;
-    }
-    else if (count == 3)
-    {
-        three = true;
-    }
-    else if (count == 4)
-    {
-        four = true;
-    }
-    return count;
+
+    return res;
 }
 
 string hand::getPokerHandAsString()
@@ -249,7 +297,7 @@ string hand::getPokerHandAsString()
     }
     else if (value == 10)
     {
-        return "High Card";
+        return "High Card: " + cards[4].getRankAsString();
     }
     else
     {

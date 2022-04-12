@@ -46,6 +46,25 @@ void player::setFullHand()
     }
 }
 
+void player::testSetFullHand(int rank1, int rank2, int rank3, int rank4, int rank5, int suit1, int suit2, int suit3, int suit4, int suit5)
+{
+    // first 5 inputs are ranks 1-13
+    // next 5 inputs are suits 1-4
+    playersHand.addCard(card(rank1, suit1));
+    playersHand.addCard(card(rank2, suit2));
+    playersHand.addCard(card(rank3, suit3));
+    playersHand.addCard(card(rank4, suit4));
+    playersHand.addCard(card(rank5, suit5));
+}
+
+void player::clearHand()
+{
+    while (playersHand.getNumCards() > 0)
+    {
+        playersHand.removeCard(0);
+    }
+}
+
 string player::getName()
 {
     return name;
