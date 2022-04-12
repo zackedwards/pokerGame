@@ -1,5 +1,5 @@
-//Implementation class for a player
-//Author: Zack Edwards
+// Implementation class for a player
+// Author: Zack Edwards
 
 #include <iostream>
 #include <ctime>
@@ -7,7 +7,6 @@
 #include "hand.h"
 #include "player.h"
 
-using namespace texasHoldEm;
 using namespace std;
 
 player::player(string name, int money)
@@ -70,6 +69,11 @@ int player::getHandSize()
 string player::getHand()
 {
     return playersHand.getPokerHandAsString();
+}
+
+void player::printAllCards()
+{
+    return playersHand.printHand();
 }
 
 void player::printPlayer()

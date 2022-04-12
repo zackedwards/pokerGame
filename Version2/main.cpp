@@ -19,12 +19,7 @@ public:
         this->suit = rand() % 4 + 1;
         this->rank = rand() % 13 + 1;
     }
-
-    void hearts()
-    {
-        this->suit = 3;
-    }
-
+    
     int getSuit()
     {
         return suit;
