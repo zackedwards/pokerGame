@@ -1,9 +1,9 @@
 To Run:
 Download and execute poker.exe
-
 You can use ./executables/poker.exe to run in the command line
-
 Use ./executables/test.exe to run the test cases
+
+
 
 Build Commands
 
