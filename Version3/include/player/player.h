@@ -6,6 +6,7 @@
 
 #include "../card/card.h"
 #include "../hand/hand.h"
+#include "../deck/deck.h"
 
 using namespace std;
 
@@ -28,6 +29,7 @@ public:
     void setBet(int bet);
     void setHandSize(int handSize);
     void setFullHand();
+    void setFullHand(deck *d);
     void testSetFullHand(int rank1, int rank2, int rank3, int rank4, int rank5, int suit1, int suit2, int suit3, int suit4, int suit5);
     void clearHand();
     int getMoney();

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <ctime>
+
 #include "../card/card.h"
 #include "../hand/hand.h"
 #include "player.h"
@@ -43,6 +44,14 @@ void player::setFullHand()
     for (int i = 0; i < handSize; i++)
     {
         playersHand.addCard(card());
+    }
+}
+
+void player::setFullHand(deck *d)
+{
+    for (int i = 0; i < handSize; i++)
+    {
+        playersHand.addCard(d->dealCard());
     }
 }
 

@@ -6,6 +6,7 @@
 #include <map>
 
 #include "../card/card.h"
+#include "../deck/deck.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ private:
 public:
     struct occurances_result;
     hand();
+    hand(deck);
     void addCard(card);
     void addCard(int, int);
     string getPokerHandAsString();

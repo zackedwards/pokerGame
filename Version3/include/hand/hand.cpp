@@ -21,6 +21,17 @@ hand::hand()
     numCards = 0;
 }
 
+hand::hand(deck d)
+{
+    cards = new card[5];
+    numCards = 0;
+    for (int i = 0; i < 5; i++)
+    {
+        cards[i] = d.dealCard();
+        numCards++;
+    }
+}
+
 void hand::addCard(card c)
 {
     if (numCards < 5)

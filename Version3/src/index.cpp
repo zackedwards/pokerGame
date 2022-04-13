@@ -20,10 +20,20 @@ int main(int argc, const char *argv[])
     cout << "            Poker" << endl;
     cout << "*****************************" << endl;
 
-    player player1("name", 5000);
-    player1.setFullHand();
-    player1.printAllCards();
-    cout << player1.getHand();
+    // Start
+    bool gameState = true;
 
+    // Game Loop
+    while (gameState)
+    {
+        cout << "Press 1 to play again, any other key to exit" << endl;
+        int input;
+        cin >> input;
+        if (input != 1)
+        {
+            gameState = false;
+        }
+    }
+    cout << "Thank you for playing!" << endl;
     return 0;
 }
